@@ -1,192 +1,165 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyDashboardApp());
+  runApp(const MyApp());
 }
 
-class MyDashboardApp extends StatelessWidget {
-  const MyDashboardApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dashboard Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 75, 32, 148)),
       ),
-      home: const DashboardPage(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.lightBlue[100],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Top Buttons A, B, C
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildTopButton('A', Colors.red),
-                  _buildTopButton('B', Colors.orange),
-                  _buildTopButton('C', Colors.yellow),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              // Fancy Section
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.purple[100],
-                  borderRadius: BorderRadius.circular(8),
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 147, 189, 210),
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Small square and long gray bar
+            Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  color: Colors.grey[300],
                 ),
-                child: Column(
-                  children: [
-                    const Text(
-                      "Fancy Section",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.indigo,
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    color: Colors.grey[300],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            
+            // Green boxes on left, orange boxes on right
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Left column with 2 green boxes
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 80,
+                        color: Colors.green[200],
                       ),
-                    ),
-                    const SizedBox(height: 12),
-                    GridView.count(
-                      shrinkWrap: true,
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: List.generate(
-                        6,
-                        (index) => _buildGridBox((index + 1).toString()),
+                      const SizedBox(height: 8),
+                      Container(
+                        height: 80,
+                        color: Colors.green[200],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Info Cards
-              const Text(
-                "Info Cards",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.indigo,
+                const SizedBox(width: 8),
+                // Right side with 2 orange boxes
+                Container(
+                  width: 140,
+                  height: 168,
+                  color: Colors.orange[200],
                 ),
-              ),
-              const SizedBox(height: 12),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  InfoCard(number: "23", label: "Active", color: Colors.teal),
-                  InfoCard(number: "15", label: "Pending", color: Colors.orange),
-                  InfoCard(number: "7", label: "Completed", color: Colors.green),
-                ],
-              ),
-            ],
-          ),
+                const SizedBox(width: 8),
+                Container(
+                  width: 140,
+                  height: 168,
+                  color: Colors.orange[200],
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            
+            // Purple boxes row
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 150,
+                    color: Colors.purple[200],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 71,
+                        color: Colors.purple[300],
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        height: 71,
+                        color: Colors.purple[300],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    height: 150,
+                    color: Colors.purple[200],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    height: 150,
+                    color: Colors.purple[100],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            
+            // Two teal boxes
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 100,
+                    color: Colors.teal[200],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Container(
+                    height: 100,
+                    color: Colors.teal[300],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            
+            // Bottom gray box
+            Container(
+              height: 80,
+              color: Colors.grey[300],
+            ),
+          ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildTopButton(String label, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Widget _buildGridBox(String text) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.purple[400],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class InfoCard extends StatelessWidget {
-  final String number;
-  final String label;
-  final Color color;
-
-  const InfoCard({
-    super.key,
-    required this.number,
-    required this.label,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 90,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 3,
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            number,
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14,
-              color: color,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }
