@@ -1,192 +1,186 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/feature_card.dart';
+import 'package:flutter_application_1/stat_card.dart';
+import 'package:flutter_application_1/bottom_buttons.dart';
 
 void main() {
-  runApp(const MyDashboardApp());
+  runApp(BusinessCardApp());
 }
 
-class MyDashboardApp extends StatelessWidget {
-  const MyDashboardApp({super.key});
+class BusinessCardApp extends StatelessWidget {
+  const BusinessCardApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dashboard Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
-      ),
-      home: const DashboardPage(),
-    );
-  }
-}
+      home: Scaffold(
+        backgroundColor: Colors.grey[100],
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Purple Card
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF8160B9),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Hello with icon
+                      Row(
+                        children: [
+                          Text(
+                            'Hello!',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 32,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Icon(
+                            Icons.waving_hand,
+                            color: Colors.yellow,
+                            size: 32,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12),
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+                      // Subtitle
+                      Text(
+                        'Try your best to build this ui',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                      SizedBox(height: 16),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(16),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.lightBlue[100],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Top Buttons A, B, C
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildTopButton('A', Colors.red),
-                  _buildTopButton('B', Colors.orange),
-                  _buildTopButton('C', Colors.yellow),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              // Fancy Section
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.purple[100],
-                  borderRadius: BorderRadius.circular(8),
+                      // Get Started Button
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF673AB7),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'Get Started',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Column(
+
+                SizedBox(height: 22),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
                   children: [
-                    const Text(
-                      "Fancy Section",
+                    Text(
+                      'Quick Stats',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Colors.indigo,
+                        color: Colors.black,
                       ),
                     ),
-                    const SizedBox(height: 12),
-                    GridView.count(
-                      shrinkWrap: true,
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: List.generate(
-                        6,
-                        (index) => _buildGridBox((index + 1).toString()),
-                      ),
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        StatCard(
+                          icon: Icons.people,
+                          iconColor: Color(0xFF673AB7),
+                          number: '1,234',
+                          label: 'Users',
+                        ),
+
+                        // Rating Card
+                        StatCard(
+                          icon: Icons.star,
+                          iconColor: Colors.orange,
+                          number: '4.8',
+                          label: 'Rating',
+                        ),
+
+                        // Success Card
+                        StatCard(
+                          icon: Icons.trending_up,
+                          iconColor: Colors.blue,
+                          number: '98%',
+                          label: 'Success',
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ),
 
-              const SizedBox(height: 24),
+                // Add this after the Quick Stats section
+                SizedBox(height: 24),
 
-              // Info Cards
-              const Text(
-                "Info Cards",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.indigo,
+                // Features Section
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // "Features" heading
+                    Text(
+                      'Features',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+
+                    // Feature Cards
+                    FeatureCard(
+                      icon: Icons.speed,
+                      iconColor: Color(0xFF673AB7),
+                      iconBgColor: Color(0xFFE1BEE7),
+                      title: 'Fast Performance',
+                      subtitle: 'Lightning fast app performance',
+                    ),
+                    SizedBox(height: 12),
+
+                    FeatureCard(
+                      icon: Icons.shield,
+                      iconColor: Colors.blue,
+                      iconBgColor: Colors.blue[100]!,
+                      title: 'Secure',
+                      subtitle: 'Your data is safe with us',
+                    ),
+                    SizedBox(height: 12),
+
+                    FeatureCard(
+                      icon: Icons.palette,
+                      iconColor: Colors.orange,
+                      iconBgColor: Colors.orange[100]!,
+                      title: 'Beautiful UI',
+                      subtitle: 'Modern and clean design',
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: 12),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  InfoCard(number: "23", label: "Active", color: Colors.teal),
-                  InfoCard(number: "15", label: "Pending", color: Colors.orange),
-                  InfoCard(number: "7", label: "Completed", color: Colors.green),
-                ],
-              ),
-            ],
+                Spacer(),
+                // Bottom Buttons
+                BottomButtons(),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildTopButton(String label, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Widget _buildGridBox(String text) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.purple[400],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-}
-
-class InfoCard extends StatelessWidget {
-  final String number;
-  final String label;
-  final Color color;
-
-  const InfoCard({
-    super.key,
-    required this.number,
-    required this.label,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 90,
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(6),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 3,
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Text(
-            number,
-            style: TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14,
-              color: color,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }
